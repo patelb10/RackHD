@@ -26,7 +26,7 @@ from pymongo import MongoClient
 from bson.objectid import ObjectId
 
 # Check the running test environment
-if fit_common.fitargs()['stack'] in ['vagrant_guest', 'vagrant', 'vagrant_ucs']:
+if fit_common.fitargs()['stack'] in ['vagrant_guest', 'vagrant', 'vagrant_ucs', 'ova']:
     env_vagrant = True
 else:
     env_vagrant = False
@@ -79,6 +79,8 @@ class test_alert_notification(unittest.TestCase):
             IP = "127.0.0.1"
         elif fit_common.fitargs()['stack'] in ['vagrant', 'vagrant_ucs']:
             IP = "10.0.2.2"
+        elif fit_common.fitargs()['stack'] == 'ova':
+            IP = "172.31.128.1"
         else:
             logs.info(" Not running in a vagrant environment, skipping tests")
             return
